@@ -1,23 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import "./App.css";
+import { Toolbar } from "./components/Toolbar/Toolbar";
+import s from "./App.styles";
+import book from "./assets/Dracula.txt";
 
 function App() {
+  const [text, setText] = useState("");
+  const [fontSize, setFontSize] = useState(1);
+  const [lineHeight, setLineHeight] = useState(1);
+  const [font, setFont] = useState("Arial");
+
+  
+  useEffect(() => {
+    fetch(book)
+      .then((r) => r.text())
+      .then((response) => {
+        setText(response);
+      });
+  });
+  // sort div formating
+ 
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Toolbar
+        setFontSize={setFontSize}
+        setLineHeight={setLineHeight}
+        setFont={setFont}
+      />
+      <s.Text fontSize={fontSize} lineHeight={lineHeight} font={font}>
+        {text}
+      </s.Text>
     </div>
   );
 }
