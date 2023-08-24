@@ -8,6 +8,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   padding-left: 10px;
   background-color: lightgrey;
+  width: 25%;
 `;
 
 const ButtonWrapper = styled.div`
@@ -25,15 +26,15 @@ const SelectorLabelContainer = styled.div`
 `;
 
 const Button = styled.button`
-  background-color: green;
-  height: 50px;
+  background-color: ${(props) => props.theme.toolbarButton};
+  height: 40px;
   margin: 0px 10px;
   border-radius: 10%;
+  border-color: ${(props) => props.theme.toolbarButtonBorder};
+  font-size: 2rem;
 `;
 
-const LabelText = styled.div`
-  color: darkolivegreen;
-`;
+const LabelText = styled.div``;
 
 const SelectContainer = styled.div`
   display: flex;

@@ -1,21 +1,33 @@
 import React from "react";
 import s from "./Toolbar.styles";
+import themes from "../styles/Themes";
 
-export const Toolbar = ({ setFontSize, setLineHeight, setFont }) => {
+export const Toolbar = ({ setFontSize, setLineHeight, setFont, setTheme }) => {
   return (
     <s.Wrapper>
       {/* NEED TO SET MINIMUM FONT SIZE AND LINE SPACE*/}
+      {/* CHANGE LINE HEIGHT WITH FONT SIZE OR NAH */}
 
       <s.SelectorLabelContainer>
         <s.LabelText>Font Size:</s.LabelText>
         <s.ButtonWrapper>
           {/* When Decrease font size button pressed, setFontSize function parses current font size, returns font size - 0.1 */}
-          <s.Button onClick={() => setFontSize((fontSize) => fontSize - 0.1)}>
-            Decrease
+          <s.Button
+            onClick={() => {
+              setFontSize((fontSize) => fontSize - 0.1);
+              setLineHeight((lineHeight) => lineHeight - 0.3);
+            }}
+          >
+            -
           </s.Button>
           {/* When Increase font size button pressed, setFontSize function parses current font size, returns font size + 0.1 */}
-          <s.Button onClick={() => setFontSize((fontSize) => fontSize + 0.1)}>
-            Increase
+          <s.Button
+            onClick={() => {
+              setFontSize((fontSize) => fontSize + 0.1);
+              setLineHeight((lineHeight) => lineHeight + 0.3);
+            }}
+          >
+            +
           </s.Button>
         </s.ButtonWrapper>
       </s.SelectorLabelContainer>
@@ -26,13 +38,13 @@ export const Toolbar = ({ setFontSize, setLineHeight, setFont }) => {
           <s.Button
             onClick={() => setLineHeight((lineHeight) => lineHeight - 0.5)}
           >
-            Decrease
+            -
           </s.Button>
           {/* When Increase line height button pressed, setLineHeight function parses current font size, returns line height + 0.5 */}
           <s.Button
             onClick={() => setLineHeight((lineHeight) => lineHeight + 0.5)}
           >
-            Increase
+            +
           </s.Button>
         </s.ButtonWrapper>
       </s.SelectorLabelContainer>
@@ -47,6 +59,20 @@ export const Toolbar = ({ setFontSize, setLineHeight, setFont }) => {
             <option value="Verdana">Verdana</option>
             <option value="Tahoma">Tahoma</option>
             <option value="Century Gothic">Century Gothic</option>
+          </select>
+        </s.SelectContainer>
+      </s.SelectorLabelContainer>
+      {/* TODO: ADD SUPPORT FOR MANY THEMES WITH .MAP */}
+      <s.SelectorLabelContainer>
+        <s.LabelText>Theme:</s.LabelText>
+        <s.SelectContainer>
+          <select
+            onChange={(e) => {
+              setTheme(JSON.parse(e.target.value));
+            }}
+          >
+            <option value={JSON.stringify(themes.lightTheme)}>Light</option>
+            <option value={JSON.stringify(themes.darkTheme)}>Dark</option>
           </select>
         </s.SelectContainer>
       </s.SelectorLabelContainer>

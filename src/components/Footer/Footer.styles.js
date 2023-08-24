@@ -10,6 +10,8 @@ const FooterContainer = styled.div`
   background-color: pink;
   height: 7vh;
   align-items: center;
+  background-color: ${(props) => props.theme.footerBackground};
+  color: ${(props) => props.theme.footerText};
 `;
 
 const Button = styled.button`
