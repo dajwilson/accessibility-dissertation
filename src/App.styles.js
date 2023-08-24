@@ -4,7 +4,8 @@ const Text = styled.div`
   font-size: ${({ fontSize }) => fontSize}rem;
   line-height: ${({ lineHeight }) => lineHeight}rem;
   font-family: ${({ font }) => font};
-  width: 60%;
+  width: 80%;
+  padding-right: 10rem;
 `;
 
 const TextWrapper = styled.div`

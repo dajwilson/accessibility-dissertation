@@ -8,12 +8,13 @@ const FooterContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   background-color: pink;
-  height: 5vh;
+  height: 7vh;
   align-items: center;
 `;
 
 const Button = styled.button`
   height: 50%;
+  margin: 0rem 1rem;
 `;
 
 const s = { FooterContainer, Button };
