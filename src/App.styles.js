@@ -4,12 +4,15 @@ const Text = styled.div`
   font-size: ${({ fontSize }) => fontSize}rem;
   line-height: ${({ lineHeight }) => lineHeight}rem;
   font-family: ${({ font }) => font};
+  width: 60%;
 `;
 
 const TextWrapper = styled.div`
-  padding: 20px 50px;
   overflow-y: scroll;
-  height: 80vh;
+  height: 95vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 `;
 
 const HorizontalContainer = styled.div`
@@ -20,21 +23,14 @@ const HorizontalContainer = styled.div`
 
 const Wrapper = styled.div`
   width: 100%;
+  display: flex;
   flex-direction: column;
-`;
-
-const Footer = styled.div`
-  width: 100%;
-  position: fixed;
-  bottom: 0;
-  background-color: pink;
 `;
 
 const s = {
   Text,
   HorizontalContainer,
   Wrapper,
-  Footer,
   TextWrapper,
 };
 

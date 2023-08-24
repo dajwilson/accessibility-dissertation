@@ -6,6 +6,7 @@ import book from "./assets/Dracula.txt";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "./components/styles/Global";
 import { Header } from "./components/Header/Header";
+import { Footer } from "./components/Footer/Footer";
 
 function App() {
   // TODO: Increase line height when font size is increased
@@ -13,6 +14,7 @@ function App() {
   const [fontSize, setFontSize] = useState(1);
   const [lineHeight, setLineHeight] = useState(1);
   const [font, setFont] = useState("Arial");
+  const bookTitle = "Dracula";
 
   useEffect(() => {
     fetch(book)
@@ -25,7 +27,7 @@ function App() {
 
   return (
     <s.Wrapper>
-      <Header />
+      <Header bookTitle={bookTitle} />
       <s.HorizontalContainer>
         <Toolbar
           setFontSize={setFontSize}
@@ -38,7 +40,7 @@ function App() {
           </s.Text>
         </s.TextWrapper>
       </s.HorizontalContainer>
-      <s.Footer>Previous Page ~~~~ Next Page </s.Footer>
+      <Footer />
     </s.Wrapper>
   );
 }

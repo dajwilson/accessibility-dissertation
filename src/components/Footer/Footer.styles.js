@@ -1,19 +1,21 @@
 import { styled } from "styled-components";
 
-const HeaderContainer = styled.div`
+const FooterContainer = styled.div`
   position: sticky;
-  top: 0;
+  bottom: 0;
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
   background-color: pink;
+  height: 5vh;
+  align-items: center;
 `;
 
-const BookTitle = styled.h1`
-  color: red;
+const Button = styled.button`
+  height: 50%;
 `;
 
-const s = { HeaderContainer, BookTitle };
+const s = { FooterContainer, Button };
 
 export default s;

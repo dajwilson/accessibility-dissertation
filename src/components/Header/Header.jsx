@@ -1,11 +1,10 @@
 import React from "react";
 import s from "./Header.styles";
 
-export const Header = () => {
+export const Header = ({ bookTitle }) => {
   return (
     <s.HeaderContainer>
-      <div>Draculla</div>
-      <div>Profile</div>
+      <s.BookTitle>{bookTitle}</s.BookTitle>
     </s.HeaderContainer>
   );
 };
