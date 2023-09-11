@@ -8,14 +8,16 @@ const Wrapper = styled.div`
   flex-direction: column;
   padding-left: 10px;
   background-color: lightgrey;
-  width: 25%;
+  width: fit-content;
+  gap: 30px;
 `;
 
 const ButtonWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 100%;
+  padding: 0px 10px;
 `;
 
 const SelectorLabelContainer = styled.div`
@@ -42,8 +44,22 @@ const SelectContainer = styled.div`
   width: 75%;
 `;
 
-const colourButton = styled.button`
+const ColourButton = styled.button`
+  background-color: ${(props) => props.theme.color};
+  height: 20px;
+  width: 20px;
+  border: 3px solid white;
+`;
+
+const BackgroundColourButton = styled.button`
   background-color: ${(props) => props.theme.background};
+  height: 20px;
+  width: 20px;
+  border: 3px solid white;
+`;
+
+const ColourPickerWrapper = styled.div`
+  width: 25%;
 `;
 
 const s = {
@@ -53,7 +69,9 @@ const s = {
   LabelText,
   SelectorLabelContainer,
   SelectContainer,
-  colourButton,
+  ColourButton,
+  BackgroundColourButton,
+  ColourPickerWrapper,
 };
 
 export default s;

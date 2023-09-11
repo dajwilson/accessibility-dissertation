@@ -13,6 +13,8 @@ export const Toolbar = ({
   theme,
 }) => {
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
+  const [displayBackgroundColorPicker, setDisplayBackgroundColorPicker] =
+    useState(false);
 
   const handleModeChange = (value) => {
     setFont(value.fontFamily);
@@ -29,11 +31,15 @@ export const Toolbar = ({
     setTheme(newTheme);
   };
 
-  const handleClick = () => {
-    setDisplayColorPicker(!displayColorPicker);
+  const handleBackgroundClick = () => {
+    setDisplayBackgroundColorPicker(!displayBackgroundColorPicker);
+    setDisplayColorPicker(false);
   };
 
-  const handleClose = () => {};
+  const handleTextClick = () => {
+    setDisplayColorPicker(!displayColorPicker);
+    setDisplayBackgroundColorPicker(false);
+  };
 
   return (
     <s.Wrapper>
@@ -121,24 +127,30 @@ export const Toolbar = ({
           </select>
         </s.SelectContainer>
       </s.SelectorLabelContainer>
-      <ChromePicker
-        color={theme.background}
-        onChange={(e) => handleColourChange({ background: e.hex })}
-      />
-      <div>
-        <s.colourButton onClick={handleClick}>
-          <div />
-        </s.colourButton>
-        {displayColorPicker ? (
-          <div>
-            <div onClick={handleClose} />
-            <ChromePicker
-              color={theme.color}
-              onChange={(e) => handleColourChange({ color: e.hex })}
-            />
-          </div>
-        ) : null}
-      </div>
+      <s.ButtonWrapper>
+        <label>Background colour</label>
+        <s.BackgroundColourButton onClick={handleBackgroundClick} />
+      </s.ButtonWrapper>
+      <s.ButtonWrapper>
+        <label>Text colour</label>
+        <s.ColourButton onClick={handleTextClick} />
+      </s.ButtonWrapper>
+      {displayBackgroundColorPicker ? (
+        <s.ColourPickerWrapper>
+          <ChromePicker
+            color={theme.background}
+            onChange={(e) => handleColourChange({ background: e.hex })}
+          />
+        </s.ColourPickerWrapper>
+      ) : null}
+      {displayColorPicker ? (
+        <s.ColourPickerWrapper>
+          <ChromePicker
+            color={theme.color}
+            onChange={(e) => handleColourChange({ color: e.hex })}
+          />
+        </s.ColourPickerWrapper>
+      ) : null}
     </s.Wrapper>
   );
 };
