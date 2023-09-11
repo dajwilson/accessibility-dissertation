@@ -1,8 +1,40 @@
 import React from "react";
+import { useState } from "react";
 import s from "./Toolbar.styles";
 import themes from "../styles/Themes";
+import modes from "../styles/Modes";
+import { ChromePicker } from "react-color";
 
-export const Toolbar = ({ setFontSize, setLineHeight, setFont, setTheme }) => {
+export const Toolbar = ({
+  setFontSize,
+  setLineHeight,
+  setFont,
+  setTheme,
+  theme,
+}) => {
+  const [displayColorPicker, setDisplayColorPicker] = useState(false);
+
+  const handleModeChange = (value) => {
+    setFont(value.fontFamily);
+    setLineHeight(value.lineHeight);
+    setFontSize(value.fontSize);
+    setTheme(value.theme);
+  };
+
+  const handleColourChange = (hexColour) => {
+    const newTheme = {
+      ...theme,
+      ...hexColour,
+    };
+    setTheme(newTheme);
+  };
+
+  const handleClick = () => {
+    setDisplayColorPicker(!displayColorPicker);
+  };
+
+  const handleClose = () => {};
+
   return (
     <s.Wrapper>
       {/* NEED TO SET MINIMUM FONT SIZE AND LINE SPACE*/}
@@ -76,6 +108,37 @@ export const Toolbar = ({ setFontSize, setLineHeight, setFont, setTheme }) => {
           </select>
         </s.SelectContainer>
       </s.SelectorLabelContainer>
+      <s.SelectorLabelContainer>
+        <s.LabelText>Mode:</s.LabelText>
+        <s.SelectContainer>
+          <select
+            onChange={(e) => {
+              handleModeChange(JSON.parse(e.target.value));
+            }}
+          >
+            <option value={JSON.stringify(modes.defaultMode)}>Default</option>
+            <option value={JSON.stringify(modes.dyslexicMode)}>Dyslexic</option>
+          </select>
+        </s.SelectContainer>
+      </s.SelectorLabelContainer>
+      <ChromePicker
+        color={theme.background}
+        onChange={(e) => handleColourChange({ background: e.hex })}
+      />
+      <div>
+        <s.colourButton onClick={handleClick}>
+          <div />
+        </s.colourButton>
+        {displayColorPicker ? (
+          <div>
+            <div onClick={handleClose} />
+            <ChromePicker
+              color={theme.color}
+              onChange={(e) => handleColourChange({ color: e.hex })}
+            />
+          </div>
+        ) : null}
+      </div>
     </s.Wrapper>
   );
 };

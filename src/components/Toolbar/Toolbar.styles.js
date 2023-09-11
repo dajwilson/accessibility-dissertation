@@ -42,6 +42,10 @@ const SelectContainer = styled.div`
   width: 75%;
 `;
 
+const colourButton = styled.button`
+  background-color: ${(props) => props.theme.background};
+`;
+
 const s = {
   Wrapper,
   ButtonWrapper,
@@ -49,6 +53,7 @@ const s = {
   LabelText,
   SelectorLabelContainer,
   SelectContainer,
+  colourButton,
 };
 
 export default s;

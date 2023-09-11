@@ -8,6 +8,7 @@ import { GlobalStyles } from "./components/styles/Global";
 import { Header } from "./components/Header/Header";
 import { Footer } from "./components/Footer/Footer";
 import themes from "./components/styles/Themes";
+// import modes from "./components/styles/Modes";
 
 function App() {
   // TODO: Increase line height when font size is increased
@@ -33,10 +34,12 @@ function App() {
         <Header bookTitle={bookTitle} />
         <s.HorizontalContainer>
           <Toolbar
+            // TODO : CHANGE BG COLOUR
             setFontSize={setFontSize}
             setLineHeight={setLineHeight}
             setFont={setFont}
             setTheme={setTheme}
+            theme={theme}
           />
           <s.TextWrapper>
             <s.Text fontSize={fontSize} lineHeight={lineHeight} font={font}>
