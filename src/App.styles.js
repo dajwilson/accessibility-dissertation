@@ -26,6 +26,8 @@ const Wrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+  background-color: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.color};
 `;
 
 const s = {

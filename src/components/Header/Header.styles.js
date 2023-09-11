@@ -7,12 +7,11 @@ const HeaderContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  background-color: pink;
+  background-color: ${(props) => props.theme.headerBackground};
+  color: ${(props) => props.theme.headerText};
 `;
 
-const BookTitle = styled.h1`
-  color: red;
-`;
+const BookTitle = styled.h1``;
 
 const s = { HeaderContainer, BookTitle };
 

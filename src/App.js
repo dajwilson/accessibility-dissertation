@@ -7,6 +7,8 @@ import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "./components/styles/Global";
 import { Header } from "./components/Header/Header";
 import { Footer } from "./components/Footer/Footer";
+import themes from "./components/styles/Themes";
+// import modes from "./components/styles/Modes";
 
 function App() {
   // TODO: Increase line height when font size is increased
@@ -14,6 +16,7 @@ function App() {
   const [fontSize, setFontSize] = useState(1);
   const [lineHeight, setLineHeight] = useState(1);
   const [font, setFont] = useState("Arial");
+  const [theme, setTheme] = useState(themes.lightTheme);
   const bookTitle = "Dracula";
 
   useEffect(() => {
@@ -26,22 +29,27 @@ function App() {
   // TODO: sort div formating
 
   return (
-    <s.Wrapper>
-      <Header bookTitle={bookTitle} />
-      <s.HorizontalContainer>
-        <Toolbar
-          setFontSize={setFontSize}
-          setLineHeight={setLineHeight}
-          setFont={setFont}
-        />
-        <s.TextWrapper>
-          <s.Text fontSize={fontSize} lineHeight={lineHeight} font={font}>
-            {text}
-          </s.Text>
-        </s.TextWrapper>
-      </s.HorizontalContainer>
-      <Footer />
-    </s.Wrapper>
+    <ThemeProvider theme={theme}>
+      <s.Wrapper>
+        <Header bookTitle={bookTitle} />
+        <s.HorizontalContainer>
+          <Toolbar
+            // TODO : CHANGE BG COLOUR
+            setFontSize={setFontSize}
+            setLineHeight={setLineHeight}
+            setFont={setFont}
+            setTheme={setTheme}
+            theme={theme}
+          />
+          <s.TextWrapper>
+            <s.Text fontSize={fontSize} lineHeight={lineHeight} font={font}>
+              {text}
+            </s.Text>
+          </s.TextWrapper>
+        </s.HorizontalContainer>
+        <Footer />
+      </s.Wrapper>
+    </ThemeProvider>
   );
 }
 

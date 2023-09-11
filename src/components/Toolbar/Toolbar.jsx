@@ -1,21 +1,65 @@
 import React from "react";
+import { useState } from "react";
 import s from "./Toolbar.styles";
+import themes from "../styles/Themes";
+import modes from "../styles/Modes";
+import { ChromePicker } from "react-color";
 
-export const Toolbar = ({ setFontSize, setLineHeight, setFont }) => {
+export const Toolbar = ({
+  setFontSize,
+  setLineHeight,
+  setFont,
+  setTheme,
+  theme,
+}) => {
+  const [displayColorPicker, setDisplayColorPicker] = useState(false);
+
+  const handleModeChange = (value) => {
+    setFont(value.fontFamily);
+    setLineHeight(value.lineHeight);
+    setFontSize(value.fontSize);
+    setTheme(value.theme);
+  };
+
+  const handleColourChange = (hexColour) => {
+    const newTheme = {
+      ...theme,
+      ...hexColour,
+    };
+    setTheme(newTheme);
+  };
+
+  const handleClick = () => {
+    setDisplayColorPicker(!displayColorPicker);
+  };
+
+  const handleClose = () => {};
+
   return (
     <s.Wrapper>
       {/* NEED TO SET MINIMUM FONT SIZE AND LINE SPACE*/}
+      {/* CHANGE LINE HEIGHT WITH FONT SIZE OR NAH */}
 
       <s.SelectorLabelContainer>
         <s.LabelText>Font Size:</s.LabelText>
         <s.ButtonWrapper>
           {/* When Decrease font size button pressed, setFontSize function parses current font size, returns font size - 0.1 */}
-          <s.Button onClick={() => setFontSize((fontSize) => fontSize - 0.1)}>
-            Decrease
+          <s.Button
+            onClick={() => {
+              setFontSize((fontSize) => fontSize - 0.1);
+              setLineHeight((lineHeight) => lineHeight - 0.3);
+            }}
+          >
+            -
           </s.Button>
           {/* When Increase font size button pressed, setFontSize function parses current font size, returns font size + 0.1 */}
-          <s.Button onClick={() => setFontSize((fontSize) => fontSize + 0.1)}>
-            Increase
+          <s.Button
+            onClick={() => {
+              setFontSize((fontSize) => fontSize + 0.1);
+              setLineHeight((lineHeight) => lineHeight + 0.3);
+            }}
+          >
+            +
           </s.Button>
         </s.ButtonWrapper>
       </s.SelectorLabelContainer>
@@ -26,13 +70,13 @@ export const Toolbar = ({ setFontSize, setLineHeight, setFont }) => {
           <s.Button
             onClick={() => setLineHeight((lineHeight) => lineHeight - 0.5)}
           >
-            Decrease
+            -
           </s.Button>
           {/* When Increase line height button pressed, setLineHeight function parses current font size, returns line height + 0.5 */}
           <s.Button
             onClick={() => setLineHeight((lineHeight) => lineHeight + 0.5)}
           >
-            Increase
+            +
           </s.Button>
         </s.ButtonWrapper>
       </s.SelectorLabelContainer>
@@ -50,6 +94,51 @@ export const Toolbar = ({ setFontSize, setLineHeight, setFont }) => {
           </select>
         </s.SelectContainer>
       </s.SelectorLabelContainer>
+      {/* TODO: ADD SUPPORT FOR MANY THEMES WITH .MAP */}
+      <s.SelectorLabelContainer>
+        <s.LabelText>Theme:</s.LabelText>
+        <s.SelectContainer>
+          <select
+            onChange={(e) => {
+              setTheme(JSON.parse(e.target.value));
+            }}
+          >
+            <option value={JSON.stringify(themes.lightTheme)}>Light</option>
+            <option value={JSON.stringify(themes.darkTheme)}>Dark</option>
+          </select>
+        </s.SelectContainer>
+      </s.SelectorLabelContainer>
+      <s.SelectorLabelContainer>
+        <s.LabelText>Mode:</s.LabelText>
+        <s.SelectContainer>
+          <select
+            onChange={(e) => {
+              handleModeChange(JSON.parse(e.target.value));
+            }}
+          >
+            <option value={JSON.stringify(modes.defaultMode)}>Default</option>
+            <option value={JSON.stringify(modes.dyslexicMode)}>Dyslexic</option>
+          </select>
+        </s.SelectContainer>
+      </s.SelectorLabelContainer>
+      <ChromePicker
+        color={theme.background}
+        onChange={(e) => handleColourChange({ background: e.hex })}
+      />
+      <div>
+        <s.colourButton onClick={handleClick}>
+          <div />
+        </s.colourButton>
+        {displayColorPicker ? (
+          <div>
+            <div onClick={handleClose} />
+            <ChromePicker
+              color={theme.color}
+              onChange={(e) => handleColourChange({ color: e.hex })}
+            />
+          </div>
+        ) : null}
+      </div>
     </s.Wrapper>
   );
 };
