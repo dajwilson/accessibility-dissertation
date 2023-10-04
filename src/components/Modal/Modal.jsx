@@ -1,11 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import s from "./Modal.styles";
 import FocusTrap from "focus-trap-react";
 
-export const Modal = ({ setShowModal }) => {
+export const Modal = ({ setShowModal, setText }) => {
+  const [file, setFile] = useState(null);
+  
   const handleClick = () => {
     setShowModal(false);
   };
+
+  const onFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
+  const onFileUpload = () => {
+    file.text().then((response) => {
+      setText(response);
+    });
+    setShowModal(false);
+  };
+
+//   TODO: format buttons 
   return (
     <FocusTrap>
       <s.ModalContainer>
@@ -13,13 +28,9 @@ export const Modal = ({ setShowModal }) => {
         <s.ModalTitleContainer>
           <h1>Upload a text file</h1>
         </s.ModalTitleContainer>
-        <p>
-          Here is a focus trap <a href="#">with</a> <a href="#">some</a>{" "}
-          <a href="#">focusable</a> parts.
-        </p>
         <div>
-          <input type="file" onChange={this.onFileChange} />
-          <button onClick={this.onFileUpload}>Upload!</button>
+          <input type="file" onChange={onFileChange} />
+          <button onClick={onFileUpload}>Upload!</button>
         </div>
       </s.ModalContainer>
     </FocusTrap>

@@ -20,22 +20,12 @@ function App() {
   const [theme, setTheme] = useState(themes.lightTheme);
   const bookTitle = "Dracula";
   const [showModal, setShowModal] = useState(false);
-
-  useEffect(() => {
-    fetch(book)
-      .then((r) => r.text())
-      .then((response) => {
-        setText(response);
-        // setText(response.split("\n"));
-      });
-  });
-  // TODO: sort div formating
-
+  
   return (
     <ThemeProvider theme={theme}>
       <s.Wrapper>
         <Header bookTitle={bookTitle} setShowModal={setShowModal} />
-        {showModal && <Modal setShowModal={setShowModal} />}
+        {showModal && <Modal setShowModal={setShowModal} setText={setText} />}
         <s.HorizontalContainer>
           <Toolbar
             setFontSize={setFontSize}
