@@ -8,33 +8,26 @@ import { GlobalStyles } from "./components/styles/Global";
 import { Header } from "./components/Header/Header";
 import { Footer } from "./components/Footer/Footer";
 import themes from "./components/styles/Themes";
+import { Modal } from "./components/Modal/Modal";
 // import modes from "./components/styles/Modes";
 
 function App() {
   // TODO: Increase line height when font size is increased
-  const [text, setText] = useState("");
+  const [text, setText] = useState([]);
   const [fontSize, setFontSize] = useState(1);
   const [lineHeight, setLineHeight] = useState(1);
   const [font, setFont] = useState("Arial");
   const [theme, setTheme] = useState(themes.lightTheme);
   const bookTitle = "Dracula";
-
-  useEffect(() => {
-    fetch(book)
-      .then((r) => r.text())
-      .then((response) => {
-        setText(response);
-      });
-  });
-  // TODO: sort div formating
-
+  const [showModal, setShowModal] = useState(false);
+  
   return (
     <ThemeProvider theme={theme}>
       <s.Wrapper>
-        <Header bookTitle={bookTitle} />
+        <Header bookTitle={bookTitle} setShowModal={setShowModal} />
+        {showModal && <Modal setShowModal={setShowModal} setText={setText} />}
         <s.HorizontalContainer>
           <Toolbar
-            // TODO : CHANGE BG COLOUR
             setFontSize={setFontSize}
             setLineHeight={setLineHeight}
             setFont={setFont}
