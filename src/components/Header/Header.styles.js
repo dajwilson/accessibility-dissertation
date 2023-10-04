@@ -13,6 +13,13 @@ const HeaderContainer = styled.div`
 
 const BookTitle = styled.h1``;
 
-const s = { HeaderContainer, BookTitle };
+const UploadButton = styled.button`
+  position: absolute;
+  right: 0;
+  top: 40%;
+  margin-right: 20px;
+`;
+
+const s = { HeaderContainer, BookTitle, UploadButton };
 
 export default s;
