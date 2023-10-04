@@ -20,7 +20,7 @@ function App() {
   const [theme, setTheme] = useState(themes.lightTheme);
   const bookTitle = "Dracula";
   const [showModal, setShowModal] = useState(false);
-  
+
   return (
     <ThemeProvider theme={theme}>
       <s.Wrapper>
