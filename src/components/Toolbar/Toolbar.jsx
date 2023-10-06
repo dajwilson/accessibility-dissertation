@@ -15,7 +15,10 @@ export const Toolbar = ({
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
   const [displayBackgroundColorPicker, setDisplayBackgroundColorPicker] =
     useState(false);
-
+  const maxLineHeight = 2.7; //max and min line heights and font sizes 
+  const minLineHeight = 0.5;
+  const maxFontSize = 2.7;
+  const minFontSize = 0.5;
   const handleModeChange = (value) => {
     setFont(value.fontFamily);
     setLineHeight(value.lineHeight);
@@ -47,13 +50,17 @@ export const Toolbar = ({
       {/* CHANGE LINE HEIGHT WITH FONT SIZE OR NAH */}
 
       <s.SelectorLabelContainer>
-        <s.LabelText>Font Size:</s.LabelText>
+        <s.LabelText>Font Size: </s.LabelText>
         <s.ButtonWrapper>
           {/* When Decrease font size button pressed, setFontSize function parses current font size, returns font size - 0.1 */}
           <s.Button
             onClick={() => {
-              setFontSize((fontSize) => fontSize - 0.1);
-              setLineHeight((lineHeight) => lineHeight - 0.3);
+              setFontSize((fontSize) =>
+                fontSize <= minFontSize ? fontSize : fontSize - 0.1
+              );
+              setLineHeight((lineHeight) =>
+                lineHeight <= minLineHeight ? lineHeight : lineHeight - 0.3
+              );
             }}
           >
             -
@@ -61,8 +68,12 @@ export const Toolbar = ({
           {/* When Increase font size button pressed, setFontSize function parses current font size, returns font size + 0.1 */}
           <s.Button
             onClick={() => {
-              setFontSize((fontSize) => fontSize + 0.1);
-              setLineHeight((lineHeight) => lineHeight + 0.3);
+              setFontSize((fontSize) =>
+                fontSize >= maxFontSize ? fontSize : fontSize + 0.1
+              );
+              setLineHeight((lineHeight) =>
+                lineHeight >= maxLineHeight ? lineHeight : lineHeight + 0.3
+              );
             }}
           >
             +
@@ -74,13 +85,21 @@ export const Toolbar = ({
         <s.ButtonWrapper>
           {/* When Decrease line height button pressed, setLineHeight function parses current font size, returns line height - 0.5 */}
           <s.Button
-            onClick={() => setLineHeight((lineHeight) => lineHeight - 0.5)}
+            onClick={() =>
+              setLineHeight((lineHeight) =>
+                lineHeight <= minLineHeight ? lineHeight : lineHeight - 0.5
+              )
+            }
           >
             -
           </s.Button>
           {/* When Increase line height button pressed, setLineHeight function parses current font size, returns line height + 0.5 */}
           <s.Button
-            onClick={() => setLineHeight((lineHeight) => lineHeight + 0.5)}
+            onClick={() =>
+              setLineHeight((lineHeight) =>
+                lineHeight >= maxLineHeight ? lineHeight : lineHeight + 0.5
+              )
+            }
           >
             +
           </s.Button>
